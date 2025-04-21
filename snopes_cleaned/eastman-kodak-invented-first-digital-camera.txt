@@ -1,0 +1,37 @@
+About this rating
+
+Kodak engineer Steve Sasson invented the first portable, digital camera in 1975. Kodak received a patent for the device in 1978, but did not put it into production.
+
+While Kodak did not push forward with production in 1975 and challenged the wisdom of moving away from its camera-film market, the company's reasoning for not developing it then was largely due to the device not being ready or practical for the market.
+
+A long-standing internet claim holds that the film and camera company Eastman Kodak invented the first digital camera, but kept the invention hidden from the public because of the threat it posed to its photographic-film-based business model:
+
+Aspects of this meme are true. Though larger-scale applications involving the digitization of images already existed, Kodak engineer Steve Sasson created the first portable digital camera in 1975. He demonstrated the product to the company's executives, and they decided to patent the technology but not to develop it for sale.
+
+It is an oversimplification to say that a fear over a future film-less world led Kodak to "hide" the invention from the public, in part because it neglects the fact that the product was not ready at the time, that no real market for the product existed in 1975, and that Kodak further developed digital cameras following this initial invention. Kodak received substantial sums from the patent it received for Sasson's device in 1978, as well.
+
+In 1973, at age 23, Sasson took a job as an electrical engineer at Kodak. As described by The New York Times in 2015, "soon after arriving at Kodak, Mr. Sasson was given a seemingly unimportant task — to see whether there was any practical use for a charged coupled device (CCD), which had been invented a few years earlier." Such devices can translate light to digital signals, and are key to all digital cameras.
+
+Two years later, he had finished his device — a Frankensteined mishmash of leftover lenses, circuits, and a cassette tape for memory. As described by the Times:
+
+The final result was a Rube Goldberg device with a lens scavenged from a used Super-8 movie camera; a portable digital cassette recorder; 16 nickel cadmium batteries; an analog/digital converter; and several dozen circuits — all wired together on half a dozen circuit boards.
+
+By 1976, Sasson was ready to demo the invention to executives at Kodak, as he described to the photography outlet PetaPixel:
+
+"I would walk in with my crazy-looking camera, which was about the size of a toaster, but I could hold it," Sasson says. "I took pictures of people in the room before I said anything. Then I took out the tape that the digital information was stored on and put it in the playback unit when a picture popped up on the TV screen. And that generally got everybody's attention."
+
+"Indeed, they didn't ask me how this worked," Sasson says. They simply asked me why anybody would want to take a picture this way when there was nothing wrong with conventional photography. Nobody [including the bosses at Kodak] was asking me to develop this camera. In fact, nobody even knew that I was developing this camera.
+
+The file size of the picture it produced — a black, white, and gray grid of 100 by 100 pixels — was 5 kilobytes. It took nearly a half a minute to save the data from the image to a cassette tape. "It only took 50 milliseconds to capture the image, but it took 23 seconds to record it to the tape," Sasson said .
+
+When asked how long before this technology could match that of a film camera, Sasson figured it was about 15-20 years away. At the time, the photographs had to be displayed on a TV. Personal computers were far from ubiquitous — the first Apple I computer kit was released a year later in 1976.
+
+Business and marketing directors at Kodak were, indeed, skeptical of the wisdom of creating a product that could potentially make their photographic-film business obsolete. As reported in the Times, "Kodak's marketing department was not interested in [Sasson's prototypes]. Mr. Sasson was told they could sell the camera, but wouldn't — because it would eat away at the company's film sales."
+
+While this may have been a motivating factor to some at Kodak, such concerns did not stop Kodak — or even Sasson — from further developing digital cameras and making several technical developments that led to Kodak's first publicly available digital camera in 1991, the Digital Camera System. As reported in a 1991 Associated Press article:
+
+Eastman Kodak Co is taking its first step into filmless photography with an electronic camera system that can turn a conventional Nikon into a high-tech electronic camera. The Professional Digital Camera System will sell for about $20000. It is intended primarily for photojournalists and government surveillance, Kodak said.
+
+Sasson's developments were crucial to develop this technology. In 2009, U.S. President Barack Obama awarded Sasson the National Medal of Technology and Innovation for his contributions to digital photography.
+
+Because the first portable digital camera was, indeed, invented in 1975 by Kodak, but because concerns about destroying its film business did not stop Kodak from developing the technology further, we rate this claim as a "Mixture" of truth.

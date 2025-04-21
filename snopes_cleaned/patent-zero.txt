@@ -1,0 +1,15 @@
+Claim: The Centers for Disease Control (CDC) owns a patent on Ebola.
+
+MIXTURE:
+
+TRUE: The CDC patented a strain of Ebola in 2010.
+
+FALSE: The CDC created Ebola and obtained a patent for it to restrict or profit from the development of a vaccine.
+
+Example: [Collected via email, October 2014] Is there any truth to the rumor that The United States Government is one of 6 owners of a patent on the Ebola virus?  Does this mean they have the right to demand blood samples from any victims?  Can they force those on government health care to take experimental Ebola vaccines that they develop?  Is the CDC purposely allowing Ebola to enter the country in order to cause a "run" on a newly developed vaccine?
+
+Origins: The 2014 Ebola outbreak began in December 2013 and is the deadliest recorded since the discovery of ebolaviruses in 1976. The severity and scope of the 2014 Ebola outbreak has caused significant global concern over the threat posed by the disease, and a number of rumors have resulted.
+
+One pervasive strain of rumors centers around "ownership" of what many understand to be the Ebola virus: more specifically, ownership of a patent granted to the Centers for Disease Control and Prevention (CDC) in 2010, Patent No. CA2741523A1 . An abstract for that patent reads:
+
+The invention provides the isolated human Ebola (hEbola) viruses denoted as Bundibugyo (EboBun) deposited with the Centers for Disease Control and Prevention ("CDC"; Atlanta, Georgia, United States of America) on November 26, 2007 and accorded an accession number 200706291.

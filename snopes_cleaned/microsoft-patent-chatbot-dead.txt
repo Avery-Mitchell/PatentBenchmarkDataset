@@ -1,0 +1,15 @@
+About this rating
+
+Microsoft was granted a patent to develop a chatbot to converse in the personality of a specific person, using their social data. This includes people both living and dead.
+
+There are no plans to develop this technology at Microsoft as of this writing.
+
+Real-life technology may be more like an episode of the Netflix show "Black Mirror" than we realize. A chatbot that could be developed by Microsoft is remarkably similar to technology seen in an episode of the science fiction show that allowed a character to talk to an artificial version of her deceased partner.
+
+In December 2020, Microsoft was granted a patent for a chatbot that allows users to have a virtual conversation with any specific person, living or dead. According to the filing from the U.S. Patent and Trademark Office (USPTO), this could be a "past or present entity ... such as a friend, a relative, an acquaintance, a celebrity, a fictional character, a historical figure.”
+
+However, in a tweet posted in January 2021, Tim O’Brien, Microsoft's general manager of Artificial Intelligence (AI) programs, said, “there’s no plan for this. But if I ever get a job writing for Black Mirror, I’ll know to go to the USPTO website for story ideas.” (The "Black Mirror" episode in question, " Be Right Back ," aired in 2013 , years before Microsoft applied for the patent.) He said in a separate tweet that Microsoft applied for this patent in April 2017, which “predates the AI ethics reviews we do today (I sit on the panel), and I'm not aware of any plan to build/ship (and yes, it's disturbing).”
+
+According to the patent filing , social data would be accessed using “images, voice data, electronic messages, social media posts, written letters” to modify a “special index in the theme of the specific person’s personality. The special index may be used to train a chat bot to converse and interact in the personality of the specific person.”
+
+While this chatbot may not be in development, the patent was indeed granted to Microsoft on Dec. 1, 2020 . We thus rate this claim as “Mostly True.”

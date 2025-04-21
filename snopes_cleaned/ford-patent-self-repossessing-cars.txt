@@ -1,0 +1,17 @@
+About this rating
+
+Ford is granted over 1,000 patents a year, and this is only an application for a patent. In a statement, the company said, "We don't have any plans to deploy this."
+
+On Feb. 23, 2023, the U.S. Patent Office published a Ford Global Technologies application titled, "Systems and Methods to Repossess a Vehicle." As described by The Drive, the auto-focused outlet that first spotted it, the document "describes several ways to make the life of somebody who has missed several car payments harder."
+
+One of the more extreme scenarios described in the patent application garnered significant media attention . As proposed by Ford, the application describes, in the case of autonomous or self-driving cars, a system that sends "a command to the autonomous vehicle to travel to a vehicle repossession site." Several other strategies are described in the application, as reported by The Drive:
+
+The system, which could be installed on any future vehicle in the automaker's lineup with a data connection would be capable of "[disabling] a functionality of one or more components of the vehicle." Everything from the engine to the air conditioning.
+
+For vehicles with autonomous or semi-autonomous driving capability, the system could "move the vehicle from a first spot to a second spot that is more convenient for a tow truck to tow the vehicle... move the vehicle from the premises of the owner to a location such as, for example, the premises of the repossession agency," or, if the lending institution considers the "financial viability of executing a repossession procedure" to be unjustifiable, the vehicle could drive itself to the junkyard.
+
+In a statement, Ford said that company officials "don't have any plans to deploy" the technology described in the application. As explained by The Drive, filing an application does not necessarily signal an intent to develop or use an idea:
+
+Patent documents, especially applications like this one, do not necessarily represent an automaker's intent to introduce the described feature, process, or technology to its vehicles. Ford might just be attempting to protect this idea for the sake of doing so.
+
+Because, however, the patent document is real and fairly described, we rate this claim "True."
