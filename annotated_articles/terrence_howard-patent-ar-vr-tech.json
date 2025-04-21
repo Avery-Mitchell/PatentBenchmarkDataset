@@ -1,0 +1,15 @@
+{
+    "claim": "Actor Terrence Howard holds a patent on augmented and virtual reality technology.",
+    "author": "Nikki Dobrin",
+    "date_published": "2024-05-31",
+    "summary": "Terrence Howard claimed on a podcast that he holds multiple patents, including the first for AR/VR. While he did file a patent application in 2010, it was abandoned in 2013 due to a failure to respond to the USPTO. Therefore, he was never granted a patent for the technology.",
+    "evidence": [
+      "Howard filed patent application US12/765,485 in 2010 titled 'World of Windows' related to AR/VR tech.",
+      "The patent application was abandoned in 2013 due to failure to respond to an office action.",
+      "USPTO records confirm Howard never received a granted patent number for this application.",
+      "On 'The Joe Rogan Experience,' Howard said his agents kept charging him fees which led him to abandon the application.",
+      "Howard claimed that companies like Sony, Microsoft, and Amazon cited his patent, but citation does not imply use or endorsement.",
+      "Citations in patent filings do not mean the technology was used—just considered as prior art."
+    ],
+    "label": "Mixture"
+  }
