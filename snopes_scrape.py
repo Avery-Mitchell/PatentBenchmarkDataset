@@ -7,6 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+import requests
+import os
+from bs4 import BeautifulSoup
+from typing import Optional
 
 def get_articles_from_page(search_term: str, page_num: int) -> list[tuple[str, str]]:
     """
@@ -56,40 +60,105 @@ def get_articles_from_page(search_term: str, page_num: int) -> list[tuple[str, s
     driver.quit()
     return articles
 
-# May scrap this and manually input page numbers 
-def scrape_all_articles(search_term: str) -> list[tuple[str, str]]:
+def download_articles(articles: list[tuple[str, str]]) -> None:
     """
-    Scrapes all Snopes search results for a given term across all pages.
+    Downloads all the snopes articles' html to snopes_raw folder
 
     Arguments:
-        search_term: the term used in the website's search bar
-        page_num: the page number of the search results
+        articles: list of tuples (title, url) from get_articles_from_page
 
     Returns:
-        A combined list of (title, link) tuples from all pages.
+        None
     """
-    all_articles: list[tuple[str, str]] = []
-    page = 1
+    
+    os.makedirs("snopes_raw", exist_ok=True)
 
-    while True:
-        print(f"Scraping page {page}...")
-        articles = get_articles_from_page(search_term, page)
+    for title, url in articles:
+        try:
+            new_title = url.rstrip('/').split('/')[-1]
+            filename = os.path.join("snopes_raw", f"{new_title}.txt")
+            
+            response = requests.get(url)
+            response.raise_for_status()
 
-        if not articles:
-            print("No more articles found. Stopping.")
-            break
+            with open(filename, 'w', encoding='utf-8') as f:
+                f.write(response.text)
 
-        all_articles.extend(articles)
-        page += 1
-        time.sleep(1) 
+            print(f"Saved {url} as {filename}")
+        except Exception as e:
+            print(f"Failed to download {url}: {e}")
 
-    return all_articles
+def extract_article_text(html_file_path: str) -> Optional[str]:
+    """
+    Extracts text from raw html
 
+    Arguments:
+        html_file_path: path to raw html file
+
+    Returns:
+        text from raw html
+    """
+    with open(html_file_path, 'r', encoding='utf-8') as f:
+        html = f.read()
+    soup = BeautifulSoup(html, 'html.parser')
+
+    article = soup.find('article')
+    if not article:
+        article = soup.find('div', class_='single-body-card')
+
+    if not article:
+        article = soup
+
+    content_blocks = article.find_all(['p', 'h2', 'h3'])
+
+    clean_paragraphs = []
+    for block in content_blocks:
+        text = block.get_text(separator=' ', strip=True) 
+        if text:
+            clean_paragraphs.append(text)
+
+    if clean_paragraphs:
+        return '\n\n'.join(clean_paragraphs)
+    else:
+        return None
+    
+def clean_all_articles() -> None:
+    """
+    Cleans all the articles in snopes_raw and saves them to snopes_cleaned
+
+    Arguments:
+        None
+    Returns:
+        None
+    """
+    os.makedirs("snopes_cleaned", exist_ok=True)
+
+    for filename in os.listdir("snopes_raw"):
+        if not filename.endswith(".txt"):
+            continue 
+
+        input_path = os.path.join("snopes_raw", filename)
+        output_path = os.path.join("snopes_cleaned", filename)
+
+        article_text = extract_article_text(input_path)
+
+        if article_text:
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(article_text)
+            print(f"Cleaned: {filename}")
+        else:
+            print(f"Skipped: {filename}")
 
 if __name__ == "__main__":
+    """
     search_term = "patents"
-    results = scrape_all_articles(search_term)
+    results = get_articles_from_page("patents", 1)
+    for x in range(1, 7):
+        articles = get_articles_from_page("patents", x)
+        download_articles(articles)
 
-    print(f"\n✅ Total articles found: {len(results)}\n")
+    print(f"\nTotal articles found: {len(results)}\n")
     for i, (title, link) in enumerate(results, start=1):
         print(f"{i}. {title}\n   {link}\n")
+    """
+    clean_all_articles()
