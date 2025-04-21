@@ -12,6 +12,7 @@ import os
 from bs4 import BeautifulSoup
 from typing import Optional
 import re
+import json
 
 def get_articles_from_page(search_term: str, page_num: int) -> list[tuple[str, str]]:
     """
@@ -122,6 +123,18 @@ def extract_article_text(html_file_path: str) -> Optional[str]:
     date_tag = soup.select_one(".publish_date")
     date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
 
+    claim = "N/A"
+    rating = "N/A"
+    for script in soup.find_all("script", {"type": "application/ld+json"}):
+        try:
+            data = json.loads(script.string)
+            if isinstance(data, dict) and data.get("@type") == "ClaimReview":
+                claim = data.get("claimReviewed", "N/A")
+                rating = data.get("reviewRating", {}).get("alternateName", "N/A")
+                break
+        except (json.JSONDecodeError, TypeError):
+            continue
+
     content_blocks = article.find_all(['p', 'h2', 'h3'])
 
     clean_paragraphs = []
@@ -132,7 +145,14 @@ def extract_article_text(html_file_path: str) -> Optional[str]:
 
     body_text = '\n\n'.join(clean_paragraphs)
     if body_text:
-        return f"Author: {author}\nDate Published: {date}\n\n{body_text}"
+        full_text = (
+            f"Author: {author}\n"
+            f"Date: {date}\n"
+            f"Claim: {claim}\n"
+            f"Rating: {rating}\n\n"
+            f"{body_text}"
+        )
+        return full_text
     else:
         return None
     
