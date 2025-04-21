@@ -1,3 +1,6 @@
+Author: Snopes Staff
+Date Published: Published June 30, 2016
+
 At the end of June 2016, apple won approval from the U.S. Patent and Trademark Office for a patent (originally filed in 2011) covering a technology to use infrared signals to send encoded data to cell phones via their cameras.
 
 Apple has announced no plans to deploy this technology in iPhones, nor what use they might put it to if they did, but news reports quickly seized on the idea that it could (and would) be used to prevent the taking of photographs and videos at live performances:

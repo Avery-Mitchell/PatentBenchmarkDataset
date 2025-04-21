@@ -11,6 +11,7 @@ import requests
 import os
 from bs4 import BeautifulSoup
 from typing import Optional
+import re
 
 def get_articles_from_page(search_term: str, page_num: int) -> list[tuple[str, str]]:
     """
@@ -109,6 +110,18 @@ def extract_article_text(html_file_path: str) -> Optional[str]:
     if not article:
         article = soup
 
+    script_tags = soup.find_all("script")
+    author = "Unknown Author"
+    for script in script_tags:
+        if script.string and "snopes_author_1" in script.string:
+            match = re.search(r'"snopes_author_1"\s*:\s*"([^"]+)"', script.string)
+            if match:
+                author = match.group(1)
+                break
+
+    date_tag = soup.select_one(".publish_date")
+    date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
+
     content_blocks = article.find_all(['p', 'h2', 'h3'])
 
     clean_paragraphs = []
@@ -117,8 +130,9 @@ def extract_article_text(html_file_path: str) -> Optional[str]:
         if text:
             clean_paragraphs.append(text)
 
-    if clean_paragraphs:
-        return '\n\n'.join(clean_paragraphs)
+    body_text = '\n\n'.join(clean_paragraphs)
+    if body_text:
+        return f"Author: {author}\nDate Published: {date}\n\n{body_text}"
     else:
         return None
     
