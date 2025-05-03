@@ -1,0 +1,20 @@
+{
+    "claim": "Apple was granted a patent for the rectangle shape of the iPhone.",
+    "label": "false",  
+    "source": "Snopes",
+    "url": "www.snopes.com",
+    "explanation": "Apple was awarded a design patent for specific features like rounded corners, not simply the shape of a rectangle.",
+    "evidence": [
+      "https://www.snopes.com/fact-check/apple-patent-rectangle/",
+      "https://patents.google.com/patent/USD504889S1/en"
+    ],
+    "context": {
+      "article_title": "Did Apple Patent the Rectangle?",
+      "article_text": "... full article text or relevant excerpt ..."
+    },
+    "metadata": {
+      "date_published": "2012-11-10",
+      "date_collected": "2025-04-21",
+      "author": "Snopes Staff"
+    }
+  }
