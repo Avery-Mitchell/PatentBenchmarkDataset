@@ -1,8 +1,10 @@
+Article Title: Does Microsoft Own Patent '666' To Implant Microchips in People?
 Author: Dan Evon
-Date: Published April 20, 2020
+Date Published: Published April 20, 2020
 Claim: Microsoft owns patent &quot;666,&quot; which involves inserting microchips into people to mine their activity for cryptocurrency purposes. 
 Rating: Mostly False
 
+Article Text:
 About this rating
 
 Microsoft published a patent for a "cryptocurrency system using body activity data." This patent is filed under the number WO2020060606A1.

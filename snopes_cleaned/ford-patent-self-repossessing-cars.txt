@@ -1,8 +1,10 @@
+Article Title: Did Ford Apply for a Patent for Cars That Can 'Repossess Themselves'?
 Author: Alex Kasprak
-Date: Published March 9, 2023
+Date Published: Published March 9, 2023
 Claim: Ford Global Technologies applied for a patent on a system that, among other methods, self-drives cars to an impound lot if its owner is behind on payments.
 Rating: True
 
+Article Text:
 About this rating
 
 Ford is granted over 1,000 patents a year, and this is only an application for a patent. In a statement, the company said, "We don't have any plans to deploy this."

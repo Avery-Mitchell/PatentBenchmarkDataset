@@ -1,8 +1,10 @@
+Article Title: FACT CHECK: Is Snapchat Building a Facial Recognition Database for the Feds?
 Author: David Emery
-Date: Published July 26, 2017
+Date Published: Published July 26, 2017
 Claim: Snapchat is using its &quot;Lenses&quot; photo and video filtering technology to create a facial recognition database for use by law enforcement agencies.
 Rating: False
 
+Article Text:
 About this rating
 
 One of the more whimsical messaging options offered by Snapchat — a social media app for mobile devices introduced in 2011 — is the ability to personalize selfies in real time and share them instantly with other users, a feature that has at once contributed to the app's immense popularity (Snapchat boasts an estimated 166 million users daily) and raised privacy concerns among some of its customers.

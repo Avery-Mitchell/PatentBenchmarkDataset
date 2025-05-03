@@ -120,6 +120,52 @@ def extract_article_text(html_file_path: str) -> Optional[str]:
                 author = match.group(1)
                 break
 
+    title_tag = soup.find("meta", property="og:title")
+    title = title_tag["content"] if title_tag else "Unknown Title"
+
+    date_tag = soup.select_one(".publish_date")
+    date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
+
+    claim = "N/A"
+    rating = "N/A"
+    for script in soup.find_all("script", {"type": "application/ld+json"}):
+        try:
+            data = json.loads(script.string)
+            if isinstance(data, dict) and data.get("@type") == "ClaimReview":
+                claim = data.get("claimReviewed", "N/A")
+                rating = data.get("reviewRating", {}).get("alternateName", "N/A")
+                break
+        except (json.JSONDecodeError, TypeError):
+            continue
+
+    content_blocks = article.find_all(['p', 'h2', 'h3'])
+
+    clean_paragraphs = []
+    for block in content_blocks:
+        text = block.get_text(separator=' ', strip=True) 
+        if text:
+            clean_paragraphs.append(text)
+
+    body_text = '\n\n'.join(clean_paragraphs)
+    if body_text:
+        full_text = (
+            f"Article Title: {title}\n"
+            f"Author: {author}\n"
+            f"Date Published: {date}\n"
+            f"Claim: {claim}\n"
+            f"Rating: {rating}\n\n"
+            f"Article Text:\n{body_text}"
+        )
+        return full_text
+    else:
+        return None
+    for script in script_tags:
+        if script.string and "snopes_author_1" in script.string:
+            match = re.search(r'"snopes_author_1"\s*:\s*"([^"]+)"', script.string)
+            if match:
+                author = match.group(1)
+                break
+
     date_tag = soup.select_one(".publish_date")
     date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
 

@@ -1,8 +1,10 @@
+Article Title: Did Microsoft Patent a Chatbot That Lets Users Talk to the Dead?
 Author: Nur Ibrahim
-Date: Published Jan. 27, 2021
+Date Published: Published Jan. 27, 2021
 Claim: A patent granted to Microsoft describes a chatbot that enables users to talk to a specific person, alive or dead, based on data gathered from the person’s social media, messages, voice recordings, images, written letters, and more. 
 Rating: Mostly True
 
+Article Text:
 About this rating
 
 Microsoft was granted a patent to develop a chatbot to converse in the personality of a specific person, using their social data. This includes people both living and dead.
