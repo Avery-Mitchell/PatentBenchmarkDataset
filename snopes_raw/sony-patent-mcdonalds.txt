@@ -1,3 +1,4 @@
+<!-- snopes_url: https://www.snopes.com/fact-check/sony-patent-mcdonalds/ -->
 <!DOCTYPE html>
 <html class="no-js page-article " lang="en">
 <head>
@@ -80,7 +81,7 @@
     "alternativeHeadline": "\"System for converting television commercials into interactive networked video games\" doesn't quite capture the strangeness of the invention.",
     "dateCreated": "2023-01-16T15:46:13Z",
     "datePublished": "2023-01-16T15:46:13Z",
-    "dateModified": "2023-01-16T09:31:47Z",
+    "dateModified": "2023-01-16T11:27:00Z",
     "articleSection": "Technology",
     "image": [
         "https://mediaproxy.snopes.com/width/1200/height/675/https://media.snopes.com/2023/01/sony-patent-mcdonalds-feat.png",
@@ -108,7 +109,7 @@
         "@type": "WebPage",
         "@id": "https://www.snopes.com//fact-check/sony-patent-mcdonalds/"
     },
-    "keywords": "McDonald's, Commercials, Advertisement",
+    "keywords": "McDonald's, commercial, Advertisement",
     "description": "Sony owns a patent for an interactive commercial system that allows viewers to skip commercials by yelling the brand name of the advertiser at their television or monitor. "
 }
 </script>
@@ -229,13 +230,13 @@
 <meta property="og:type" content="article"/>
 
 <meta property="article:published_time" content="2023-01-16 23:46:13"/>
-<meta property="article:modified_time" content="2025-03-17 16:31:47"/>
+<meta property="article:modified_time" content="2025-04-23 18:27:00"/>
 <meta property="article:author" content="Alex Kasprak"/>
 <meta property="article:publisher" content="https://www.facebook.com/snopes"/>
 <meta property="article:section" content=""/>
 
         <meta property="article:tag" content="McDonald's"/>
-            <meta property="article:tag" content="Commercials"/>
+            <meta property="article:tag" content="Commercial"/>
             <meta property="article:tag" content="Advertisement"/>
     
 <meta property="fb:pages" content="120680396518"/>
@@ -264,7 +265,7 @@
         article_type     : "fact_check", 
         category         : "1",
         categories       : ["Technology"],
-        tags             : ["McDonald's","Commercials","Advertisement"],
+        tags             : ["McDonald's","commercial","Advertisement"],
         lazy_load        : {"rev_content":{"time":0,"pixels":300,"status":"desktop"},"video_player":{"time":0,"pixels":300,"status":"on"},"twitter":{"time":0,"pixels":500,"status":"on"},"related":{"time":0,"pixels":300,"status":"on"},"comments":{"time":0,"pixels":300,"status":"on"},"trending":{"time":0,"pixels":300,"status":"on"}},
         page_id          : "464241",
         logged_in        : "0",
@@ -1168,7 +1169,7 @@ var ads_project = (function(sent_in_settings){
 
 								<div class="tag_wrapper">
 																			<a class="tag_button" href="/tag/mcdonalds/">McDonald's</a>
-																			<a class="tag_button" href="/tag/commercials/">Commercials</a>
+																			<a class="tag_button" href="/tag/commercial/">Commercial</a>
 																			<a class="tag_button" href="/tag/advertisements/">Advertisement</a>
 																	</div>
 							</div>
@@ -1668,11 +1669,11 @@ function get_device_type(){
 </script>
 
 <!-- Page CSS -->
-<link rel="stylesheet" href="/design/assets/main.css?rev=1d6089c855db6d9efdbfe437024c49add4e257e5" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/design/assets/main.css?rev=1d6089c855db6d9efdbfe437024c49add4e257e5"></noscript>
+<link rel="stylesheet" href="/design/assets/main.css?rev=fc94d0c9cc82ed99622ccabadef366c730e29796" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/design/assets/main.css?rev=fc94d0c9cc82ed99622ccabadef366c730e29796"></noscript>
 
 <!-- Site javascript -->
-<script src="/design/assets/bundle.js?rev=1d6089c855db6d9efdbfe437024c49add4e257e5" async></script>
+<script src="/design/assets/bundle.js?rev=fc94d0c9cc82ed99622ccabadef366c730e29796" async></script>
 
 
 <!-- Google Analytics Events -->

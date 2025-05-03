@@ -77,130 +77,72 @@ def download_articles(articles: list[tuple[str, str]]) -> None:
 
     for title, url in articles:
         try:
-            new_title = url.rstrip('/').split('/')[-1]
-            filename = os.path.join("snopes_raw", f"{new_title}.txt")
-            
-            response = requests.get(url)
-            response.raise_for_status()
+            slug = url.rstrip('/').split('/')[-1]
+            filename = f"{slug}.txt"
+            path = os.path.join("snopes_raw", filename)
 
-            with open(filename, 'w', encoding='utf-8') as f:
-                f.write(response.text)
+            resp = requests.get(url)
+            resp.raise_for_status()
 
-            print(f"Saved {url} as {filename}")
+            # ← PREPEND the URL as an HTML comment
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(f"<!-- snopes_url: {url} -->\n")
+                f.write(resp.text)
+
+            print(f"Saved {url} → {path}")
         except Exception as e:
-            print(f"Failed to download {url}: {e}")
+            print(f"Error downloading {url}: {e}")
 
-def extract_article_text(html_file_path: str) -> Optional[str]:
+def extract_article_text(html: str) -> Optional[str]:
     """
     Extracts text from raw html
 
     Arguments:
-        html_file_path: path to raw html file
+        html: path to raw html file
 
     Returns:
         text from raw html
     """
-    with open(html_file_path, 'r', encoding='utf-8') as f:
-        html = f.read()
+    # 1) get URL from our prepended comment
+    url = "Unknown URL"
+    m = re.match(r'<!--\s*snopes_url:\s*(.*?)\s*-->', html)
+    if m:
+        url = m.group(1)
+
     soup = BeautifulSoup(html, 'html.parser')
 
-    article = soup.find('article')
-    if not article:
-        article = soup.find('div', class_='single-body-card')
-
-    if not article:
-        article = soup
-
-    script_tags = soup.find_all("script")
+    # 2) author
     author = "Unknown Author"
-    for script in script_tags:
+    for script in soup.find_all("script"):
         if script.string and "snopes_author_1" in script.string:
             match = re.search(r'"snopes_author_1"\s*:\s*"([^"]+)"', script.string)
             if match:
                 author = match.group(1)
                 break
 
-    title_tag = soup.find("meta", property="og:title")
-    title = title_tag["content"] if title_tag else "Unknown Title"
-
+    # 3) title & date
+    title = soup.find("meta", property="og:title")["content"] if soup.find("meta", property="og:title") else "Unknown Title"
     date_tag = soup.select_one(".publish_date")
     date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
 
-    claim = "N/A"
-    rating = "N/A"
+    # 4) claim & rating
+    claim, rating = "N/A", "N/A"
     for script in soup.find_all("script", {"type": "application/ld+json"}):
         try:
             data = json.loads(script.string)
-            if isinstance(data, dict) and data.get("@type") == "ClaimReview":
+            if data.get("@type") == "ClaimReview":
                 claim = data.get("claimReviewed", "N/A")
                 rating = data.get("reviewRating", {}).get("alternateName", "N/A")
                 break
-        except (json.JSONDecodeError, TypeError):
+        except (ValueError, TypeError):
             continue
 
-    content_blocks = article.find_all(['p', 'h2', 'h3'])
+    # 5) body text
+    blocks = soup.find('article') or soup.find('div', class_='single-body-card') or soup
+    paras = [p.get_text(" ", strip=True) for p in blocks.find_all(['p','h2','h3']) if p.get_text(strip=True)]
+    body = "\n\n".join(paras)
 
-    clean_paragraphs = []
-    for block in content_blocks:
-        text = block.get_text(separator=' ', strip=True) 
-        if text:
-            clean_paragraphs.append(text)
-
-    body_text = '\n\n'.join(clean_paragraphs)
-    if body_text:
-        full_text = (
-            f"Article Title: {title}\n"
-            f"Author: {author}\n"
-            f"Date Published: {date}\n"
-            f"Claim: {claim}\n"
-            f"Rating: {rating}\n\n"
-            f"Article Text:\n{body_text}"
-        )
-        return full_text
-    else:
-        return None
-    for script in script_tags:
-        if script.string and "snopes_author_1" in script.string:
-            match = re.search(r'"snopes_author_1"\s*:\s*"([^"]+)"', script.string)
-            if match:
-                author = match.group(1)
-                break
-
-    date_tag = soup.select_one(".publish_date")
-    date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
-
-    claim = "N/A"
-    rating = "N/A"
-    for script in soup.find_all("script", {"type": "application/ld+json"}):
-        try:
-            data = json.loads(script.string)
-            if isinstance(data, dict) and data.get("@type") == "ClaimReview":
-                claim = data.get("claimReviewed", "N/A")
-                rating = data.get("reviewRating", {}).get("alternateName", "N/A")
-                break
-        except (json.JSONDecodeError, TypeError):
-            continue
-
-    content_blocks = article.find_all(['p', 'h2', 'h3'])
-
-    clean_paragraphs = []
-    for block in content_blocks:
-        text = block.get_text(separator=' ', strip=True) 
-        if text:
-            clean_paragraphs.append(text)
-
-    body_text = '\n\n'.join(clean_paragraphs)
-    if body_text:
-        full_text = (
-            f"Author: {author}\n"
-            f"Date: {date}\n"
-            f"Claim: {claim}\n"
-            f"Rating: {rating}\n\n"
-            f"{body_text}"
-        )
-        return full_text
-    else:
-        return None
+    return title, author, date, claim, rating, body, url
     
 def clean_all_articles() -> None:
     """
@@ -213,32 +155,54 @@ def clean_all_articles() -> None:
     """
     os.makedirs("snopes_cleaned", exist_ok=True)
 
-    for filename in os.listdir("snopes_raw"):
-        if not filename.endswith(".txt"):
-            continue 
+    for fn in os.listdir("snopes_raw"):
+        if not fn.endswith(".txt"):
+            continue
 
-        input_path = os.path.join("snopes_raw", filename)
-        output_path = os.path.join("snopes_cleaned", filename)
+        in_path = os.path.join("snopes_raw", fn)
+        out_path = os.path.join("snopes_cleaned", fn)
 
-        article_text = extract_article_text(input_path)
+        with open(in_path, 'r', encoding='utf-8') as f:
+            raw = f.read()
 
-        if article_text:
-            with open(output_path, 'w', encoding='utf-8') as f:
-                f.write(article_text)
-            print(f"Cleaned: {filename}")
-        else:
-            print(f"Skipped: {filename}")
+        title, author, date, claim, rating, body, url = extract_article_text(raw)
+
+        if not body:
+            print(f"Skipped {fn} (no body)")
+            continue
+
+        cleaned = (
+            f"Article Title: {title}\n"
+            f"Author: {author}\n"
+            f"Date Published: {date}\n"
+            f"Claim: {claim}\n"
+            f"Rating: {rating}\n"
+            f"URL: {url}\n\n"
+            f"Article Text:\n{body}"
+        )
+
+        with open(out_path, 'w', encoding='utf-8') as outf:
+            outf.write(cleaned)
+        print(f"Cleaned → {out_path}")
 
 if __name__ == "__main__":
-    """
-    search_term = "patents"
-    results = get_articles_from_page("patents", 1)
-    for x in range(1, 7):
-        articles = get_articles_from_page("patents", x)
-        download_articles(articles)
+    SEARCH_TERM = "patents"
+    NUM_PAGES   = 6
 
-    print(f"\nTotal articles found: {len(results)}\n")
-    for i, (title, link) in enumerate(results, start=1):
-        print(f"{i}. {title}\n   {link}\n")
-    """
+    # 1) Collect all (title, url) tuples across pages 0–5
+    all_articles: list[tuple[str,str]] = []
+    for p in range(NUM_PAGES):
+        print(f"Fetching page {p+1}/{NUM_PAGES} for “{SEARCH_TERM}”…")
+        page_articles = get_articles_from_page(SEARCH_TERM, p)
+        print(f"  → found {len(page_articles)} articles")
+        all_articles.extend(page_articles)
+
+    # 2) Download them into snopes_raw/ (with our URL comment)
+    print(f"\nDownloading {len(all_articles)} total articles…")
+    download_articles(all_articles)
+
+    # 3) Clean them all out into snopes_cleaned/
+    print("\nCleaning all downloaded articles…")
     clean_all_articles()
+
+    print("\nDone!  Raw HTMLs are in snopes_raw/, cleaned text in snopes_cleaned/")

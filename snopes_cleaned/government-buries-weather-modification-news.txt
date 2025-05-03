@@ -3,6 +3,7 @@ Author: Kim LaCapria
 Date Published: Published March 17, 2016
 Claim: The government buried news of weather modification in the classifieds section of a small newspaper.
 Rating: Mostly False
+URL: https://www.snopes.com/fact-check/government-buries-weather-modification-news/
 
 Article Text:
 About this rating
@@ -13,9 +14,9 @@ The only way residents could learn of the program was via a hard to find classif
 
 On 12 March 2016, the web site Wakeup World (described as news pertaining to the "energetic organism we call Earth, the Universe and the Multiverse") published a blog post claiming the American government "quietly" admitted to engaging in "weather modification" activities in a notice buried in the classifieds section of a small California newspaper:
 
-... the level of propaganda and indoctrination that the average American must wade through in order to get the smallest amount of Truth is staggering. We have reached a point in which Americans are so overwhelmed with the current battle taking place between the Alternative News community and mainstream media, and its barrage of contradicting “Facts,” that most have simply chosen to completely remove themselves from any critical thinking. Even when the government itself reveals an age-old lie to be true, most are so indoctrinated with the idea of the “conspiracy” that they convince themselves that the revelation is just another trick of those deceptive “conspiracy theorists.” ... A perfect example of this is weather modification.
+... the level of propaganda and indoctrination that the average American must wade through in order to get the smallest amount of Truth is staggering. We have reached a point in which Americans are so overwhelmed with the current battle taking place between the Alternative News community and mainstream media, and its barrage of contradicting "Facts," that most have simply chosen to completely remove themselves from any critical thinking. Even when the government itself reveals an age-old lie to be true, most are so indoctrinated with the idea of the "conspiracy" that they convince themselves that the revelation is just another trick of those deceptive "conspiracy theorists." ... A perfect example of this is weather modification.
 
-Weather modification, geoengineering, chemtrails; these are all topics that if brought up in most circles today, would garner the speaker the telltale look that most Truthers have become all too familiar with. It is a look that has been ingrained into all who have opted to cast aside their critical thinking for their comforting daily lie. There is a herd mentality that has been established that causes even those on the fence or those interested in “outside the box” ideas, to fall in line while surrounded by the docile mass. So when the government recently released a “Notice of Intent” on page 11 of the Pasadena Star Classifieds, announcing their plan to carry out weather modification in Los Angeles County, it became clear that those blank stares should be turned inward, for some much needed self-reflection and re-evaluation.
+Weather modification, geoengineering, chemtrails; these are all topics that if brought up in most circles today, would garner the speaker the telltale look that most Truthers have become all too familiar with. It is a look that has been ingrained into all who have opted to cast aside their critical thinking for their comforting daily lie. There is a herd mentality that has been established that causes even those on the fence or those interested in "outside the box" ideas, to fall in line while surrounded by the docile mass. So when the government recently released a "Notice of Intent" on page 11 of the Pasadena Star Classifieds, announcing their plan to carry out weather modification in Los Angeles County, it became clear that those blank stares should be turned inward, for some much needed self-reflection and re-evaluation.
 
 The post included photographs of early 2016 classified ads placed by Los Angeles County's Department of Public Works (DPW) in the Pasadena Star News :
 
@@ -25,7 +26,7 @@ Obviously the appropriate area of the paper to release such a controversial topi
 
 However, the Los Angeles DPW devoted an entire page to the activity (cloud seeding) mentioned in the classified advertisement [ PDF ]. That document explained cloud seeding was an anti-drought measure practiced intermittently for more than half a century in Los Angeles:
 
-Yes, since in the 1950’s the County of Los Angeles has conducted cloud seeding activities in order to augment local water supplies. When there is abundant rain or major fires affect the targeted watersheds, cloud seeding is temporarily halted.
+Yes, since in the 1950's the County of Los Angeles has conducted cloud seeding activities in order to augment local water supplies. When there is abundant rain or major fires affect the targeted watersheds, cloud seeding is temporarily halted.
 
 Public Works last had a cloud seeding contract in 2009 with North American Weather Consultants, Incorporated.
 
@@ -35,7 +36,7 @@ A Public Notice of the Draft Mitigated Negative Declaration (DMND) was published
 
 The FAQ also discussed concerns about safety and chemtrails, noting that data was collected on cloud seeding from the 1950s onward. Regarding chemtrails, the DPW said:
 
-There is no evidence of any connection between cloud seeding and chemical trails (chemtrails). Atmospheric scientists use the term “contrails” which are defined as trails of condensed water vapor created by an engine at high altitudes. These trails are the result of normal emissions of water vapor, carbon dioxide, and some carbon-containing particulates. Contrails are normally observed on otherwise clear days, when cloud seeding would not be conducted. Cloud seeding sources do not produce such visible clouds.
+There is no evidence of any connection between cloud seeding and chemical trails (chemtrails). Atmospheric scientists use the term "contrails" which are defined as trails of condensed water vapor created by an engine at high altitudes. These trails are the result of normal emissions of water vapor, carbon dioxide, and some carbon-containing particulates. Contrails are normally observed on otherwise clear days, when cloud seeding would not be conducted. Cloud seeding sources do not produce such visible clouds.
 
 Per the original blog post (which gained additional traction via the unreliable Facebook page "The Mind Unleashed"), government officials sought to hide the cloud seeding initiative by placing news of it in a single classified ads section. However, the DPW stated that the same ad appeared in multiple Los Angeles-area newspapers.
 

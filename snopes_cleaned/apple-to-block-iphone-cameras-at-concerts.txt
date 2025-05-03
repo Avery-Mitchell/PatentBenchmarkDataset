@@ -3,6 +3,7 @@ Author: Snopes Staff
 Date Published: Published June 30, 2016
 Claim: N/A
 Rating: N/A
+URL: https://www.snopes.com/news/2016/06/30/apple-to-block-iphone-cameras-at-concerts/
 
 Article Text:
 At the end of June 2016, apple won approval from the U.S. Patent and Trademark Office for a patent (originally filed in 2011) covering a technology to use infrared signals to send encoded data to cell phones via their cameras.

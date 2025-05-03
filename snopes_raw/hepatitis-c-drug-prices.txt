@@ -1,3 +1,4 @@
+<!-- snopes_url: https://www.snopes.com/fact-check/hepatitis-c-drug-prices/ -->
 <!DOCTYPE html>
 <html class="no-js page-article " lang="en">
 <head>
@@ -1673,11 +1674,11 @@ function get_device_type(){
 </script>
 
 <!-- Page CSS -->
-<link rel="stylesheet" href="/design/assets/main.css?rev=1d6089c855db6d9efdbfe437024c49add4e257e5" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/design/assets/main.css?rev=1d6089c855db6d9efdbfe437024c49add4e257e5"></noscript>
+<link rel="stylesheet" href="/design/assets/main.css?rev=fc94d0c9cc82ed99622ccabadef366c730e29796" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/design/assets/main.css?rev=fc94d0c9cc82ed99622ccabadef366c730e29796"></noscript>
 
 <!-- Site javascript -->
-<script src="/design/assets/bundle.js?rev=1d6089c855db6d9efdbfe437024c49add4e257e5" async></script>
+<script src="/design/assets/bundle.js?rev=fc94d0c9cc82ed99622ccabadef366c730e29796" async></script>
 
 
 <!-- Google Analytics Events -->

@@ -3,6 +3,7 @@ Author: David Emery
 Date Published: Published July 26, 2017
 Claim: Snapchat is using its &quot;Lenses&quot; photo and video filtering technology to create a facial recognition database for use by law enforcement agencies.
 Rating: False
+URL: https://www.snopes.com/fact-check/snapchat-facial-recognition/
 
 Article Text:
 About this rating
