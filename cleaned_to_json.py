@@ -18,6 +18,15 @@ HEADER_PATTERNS = {
 }
 
 def parse_txt_file(path):
+    """
+    Parses a Snopes article text file and extracts relevant information
+
+    Arguments:
+        path: path to the text file
+
+    Returns:
+        A dictionary containing the parsed data in a JSON-ready format
+    """
     with open(path, encoding='utf-8') as f:
         raw = f.read()
 
@@ -57,7 +66,17 @@ def parse_txt_file(path):
         }
     }
 
-def main():
+def write_to_json():
+    """
+    Reads all text files in the input directory, parses them, and writes the output to JSON files
+    
+    Arguments:
+        None
+
+    Returns:
+        None
+    """
+    
     for fn in os.listdir(INPUT_DIR):
         if not fn.lower().endswith('.txt'):
             continue
@@ -71,6 +90,6 @@ def main():
         print(f"Wrote {out_path}")
 
 if __name__ == '__main__':
-    main()
+    write_to_json()
 
 

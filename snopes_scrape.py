@@ -103,7 +103,7 @@ def extract_article_text(html: str) -> Optional[str]:
     Returns:
         text from raw html
     """
-    # 1) get URL from our prepended comment
+    # get URL from our prepended comment
     url = "Unknown URL"
     m = re.match(r'<!--\s*snopes_url:\s*(.*?)\s*-->', html)
     if m:
@@ -111,7 +111,7 @@ def extract_article_text(html: str) -> Optional[str]:
 
     soup = BeautifulSoup(html, 'html.parser')
 
-    # 2) author
+    # author
     author = "Unknown Author"
     for script in soup.find_all("script"):
         if script.string and "snopes_author_1" in script.string:
@@ -120,12 +120,12 @@ def extract_article_text(html: str) -> Optional[str]:
                 author = match.group(1)
                 break
 
-    # 3) title & date
+    # title & date
     title = soup.find("meta", property="og:title")["content"] if soup.find("meta", property="og:title") else "Unknown Title"
     date_tag = soup.select_one(".publish_date")
     date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
 
-    # 4) claim & rating
+    # claim & rating
     claim, rating = "N/A", "N/A"
     for script in soup.find_all("script", {"type": "application/ld+json"}):
         try:
@@ -137,7 +137,7 @@ def extract_article_text(html: str) -> Optional[str]:
         except (ValueError, TypeError):
             continue
 
-    # 5) body text
+    # body text
     blocks = soup.find('article') or soup.find('div', class_='single-body-card') or soup
     paras = [p.get_text(" ", strip=True) for p in blocks.find_all(['p','h2','h3']) if p.get_text(strip=True)]
     body = "\n\n".join(paras)
@@ -189,7 +189,6 @@ if __name__ == "__main__":
     SEARCH_TERM = "patents"
     NUM_PAGES   = 6
 
-    # 1) Collect all (title, url) tuples across pages 0–5
     all_articles: list[tuple[str,str]] = []
     for p in range(NUM_PAGES):
         print(f"Fetching page {p+1}/{NUM_PAGES} for “{SEARCH_TERM}”…")
@@ -197,11 +196,9 @@ if __name__ == "__main__":
         print(f"  → found {len(page_articles)} articles")
         all_articles.extend(page_articles)
 
-    # 2) Download them into snopes_raw/ (with our URL comment)
     print(f"\nDownloading {len(all_articles)} total articles…")
     download_articles(all_articles)
 
-    # 3) Clean them all out into snopes_cleaned/
     print("\nCleaning all downloaded articles…")
     clean_all_articles()
 
