@@ -17,7 +17,7 @@ HEADER_PATTERNS = {
     'url':            r'^URL:\s*(.*)$',
 }
 
-def parse_txt_file(path):
+def parse_txt_file(path: str) -> dict[str, any]:
     """
     Parses a Snopes article text file and extracts relevant information
 
@@ -47,14 +47,14 @@ def parse_txt_file(path):
     paras = [p.strip() for p in body.strip().split('\n\n') if p.strip()]
     context_text = '\n\n'.join(paras) if paras else ''
 
-    # Build the JSON-ready dict
+    # Build the JSON-ready dictionary
     return {
         "claim":       hdr['claim'],
         "label":       hdr['rating'],
         "source":      "Snopes",
         "url":         hdr['url'],
         "explanation": "",      # Needs to be manually annotated for correctness
-        "evidence":    [],      # 
+        "evidence":    [],      # Needs to be manually annotated for correctness
         "context": {
             "article_title": hdr['article_title'],
             "text":          context_text
@@ -89,7 +89,34 @@ def write_to_json():
 
         print(f"Wrote {out_path}")
 
+def combine_json_files(input_folder: str, output_file: str) -> None:
+    """
+    Combines multiple JSON files into a single JSON file.
+
+    Arguments:
+        input_folder: path to the folder containing JSON files
+        output_file: path to the output JSON file
+
+    Returns:
+        None
+    """
+
+    combined_data = []
+
+    for filename in os.listdir(input_folder):
+        if filename.endswith('.json'):
+            filepath = os.path.join(input_folder, filename)
+            with open(filepath, 'r', encoding='utf-8') as f:
+                try:
+                    data = json.load(f)
+                    combined_data.append(data)
+                except json.JSONDecodeError as e:
+                    print(f"Error decoding {filename}: {e}")
+
+    with open(output_file, 'w', encoding='utf-8') as f_out:
+        json.dump(combined_data, f_out, indent=2, ensure_ascii=False)
+
 if __name__ == '__main__':
-    write_to_json()
+    combine_json_files("annotated_articles", "dataset.json")
 
 
