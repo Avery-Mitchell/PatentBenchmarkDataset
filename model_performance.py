@@ -1,7 +1,4 @@
 import json
-import torch
-from datasets import Dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling
 from sklearn.model_selection import train_test_split
 from typing import Optional
 from together import Together
@@ -9,9 +6,7 @@ from together import Together
 from api_keys import TOGETHER_API_KEY
 
 # Together.ai client
-client = Together(api_key=TOGETHER_API_KEY) # Uses TOGETHER_API_KEY from environment variables, otherwise set manually
-
-# === DO NOT UPLOAD API KEYS TO GITHUB ===
+client = Together(api_key=TOGETHER_API_KEY) 
 
 def load_data(path: str) -> list[dict[str, any]]:
     """
