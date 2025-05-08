@@ -71,7 +71,7 @@ def train_model() -> None:
 
     # Tokenizer
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True)
-    tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.pad_token = tokenizer.eos_token # Make sure that model has a padding token and that tokenizer does not have a pad token
 
     # Tokenize the dataset
     tokenized_dataset = dataset.map(
