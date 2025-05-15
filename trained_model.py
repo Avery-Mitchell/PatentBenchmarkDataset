@@ -3,10 +3,19 @@ import torch
 from datasets import Dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling, PreTrainedTokenizerBase
 from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_kbit_training
-from typing import Any
 
-MODEL_NAME = "name of model to use"
-DATASET_PATH = "path to dataset"
+MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.2"
+DATASET_PATH = "dataset.json" 
+from api_keys import HUGGINGFACE_API_KEY
+
+
+PROMPT_TEMPLATE: str = (
+    "<s>[INST] You are an expert in evaluating patent-related claims. "
+    "Given the following claim and supporting evidence, determine whether the claim is true, false, or lacks enough information.\n"
+    "Claim: {claim}\n"
+    "Evidence: {evidence}\n"
+    "Answer with 'True', 'False', 'Mixture', or 'Not Enough Information' and explain your reasoning. [/INST]"
+)
 
 def load_dataset(dataset_path: str) -> Dataset:
     """
@@ -20,18 +29,24 @@ def load_dataset(dataset_path: str) -> Dataset:
     """
 
     # Open the JSON file and load the data
-    with open(dataset_path, "r") as f:
+    with open(dataset_path, "r", encoding="utf-8") as f:
         raw = json.load(f)
 
     # Samples to be returned - used for training
     samples = []
     for item in raw:
-        prompt = f"Claim: {item["claim"]}\nEvidence: {item["evidence"]}\nIs the claim true based on the evidence? Answer with either 'True', 'False', or 'Not Enough Information'."
-        samples.append({"prompt": prompt, "output": item["label"]})
+        claim = item.get("claim", "")
+        evidence = item.get("evidence", [])
+        evidence_str = "\n".join(evidence) if isinstance(evidence, list) else str(evidence)
+        prompt = PROMPT_TEMPLATE.format(claim=claim, evidence=evidence_str)
+        label = item.get("label", "Not Enough Information")
+        samples.append({"prompt": prompt, "label": label})
 
-    return Dataset.from_list(samples)
+    dataset = Dataset.from_list(samples)
+    print(f"Loaded {len(dataset)} examples.")
+    return dataset
 
-def tokenize(example: dict[str, str], tokenizer: PreTrainedTokenizerBase) -> dict[str, Any]:
+def tokenize(example: dict[str, str], tokenizer: PreTrainedTokenizerBase) -> dict[str, any]:
     """
     Tokenizes the input examples.
 
@@ -42,7 +57,7 @@ def tokenize(example: dict[str, str], tokenizer: PreTrainedTokenizerBase) -> dic
         tokenized input IDs and attention masks
     """
     # Text to be tokenized
-    full_text: str = f"{example['prompt']} {example['output']}"
+    full_text: str = example["prompt"]
 
     # Tokenize the text
     tokenized = tokenizer(
@@ -55,62 +70,58 @@ def tokenize(example: dict[str, str], tokenizer: PreTrainedTokenizerBase) -> dic
     
     return tokenized
 
+
 def train_model() -> None:
     """
-    Main training loop for LoRA
-
-    Arguments:
-        None
-    
-    Returns:
-        None
+    Main function to train the model using LoRA.
     """
-
-    # Load the dataset
     dataset: Dataset = load_dataset(DATASET_PATH)
+    print(f"\nLoaded dataset with {len(dataset)} samples.\n")
 
-    # Tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True)
-    tokenizer.pad_token = tokenizer.eos_token # Make sure that model has a padding token and that tokenizer does not have a pad token
-
-    # Tokenize the dataset
-    tokenized_dataset = dataset.map(
-        lambda x: tokenize(x, tokenizer),
-        batched=False
+    tokenizer = AutoTokenizer.from_pretrained(
+        MODEL_NAME, 
+        use_fast=True, 
+        token=HUGGINGFACE_API_KEY,
+        trust_remote_code=True,
     )
+    tokenizer.pad_token = tokenizer.eos_token
 
-    # Load the model
+    tokenized_dataset = dataset.map(lambda x: tokenize(x, tokenizer), batched=False)
+    tokenized_dataset = tokenized_dataset.remove_columns(["label"])
+    print("\nTokenization complete.\n")
+
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
-        load_in_4bit=True,          # use 4-bit quantization for VRAM efficiency
-        device_map="auto",          # automatically place model on GPU
-        torch_dtype=torch.float16,  # precision
+        load_in_4bit=True,
+        device_map="auto",
+        torch_dtype=torch.float16,
     )
     model = prepare_model_for_kbit_training(model)
 
-    # Configure LoRA
     lora_config = LoraConfig(
-        task_type=TaskType.CAUSAL_LM,           # LoRA for causal language modeling
-        r=8,                                    # trainable parameters
-        lora_alpha=16,                          # scaling factor
-        lora_dropout=0.05,                      # regularization
-        bias="none",                            # no bias
-        target_modules=["q_proj", "v_proj"],    # query and value projections
+        task_type=TaskType.CAUSAL_LM,
+        r=16,
+        lora_alpha=32,
+        lora_dropout=0.1,
+        bias="none",
+        target_modules=["q_proj", "v_proj"],
     )
     model = get_peft_model(model, lora_config)
 
-    # Training arguments
     training_args = TrainingArguments(
-        output_dir="./lora-patent-misinformation-model",    # output directory
-        per_device_train_batch_size=4,                      # batch size  
-        num_train_epochs=10,                                # number of passes over the dataset
-        logging_steps=10,                                   # how often to log training steps
-        save_strategy="no",                                 # does not save model checkpoints 
-        learning_rate=2e-4,                                 # starting learning rate
-        fp16=True                                           # use 16-bit floating point precision - reduces VRAM usage
+        output_dir="./lora-patent-misinformation-model",
+        per_device_train_batch_size=2,  
+        gradient_accumulation_steps=4,  
+        num_train_epochs=20, 
+        logging_steps=5,
+        save_strategy="epoch",
+        learning_rate=1e-4,
+        fp16=True,
+        warmup_ratio=0.1,
+        weight_decay=0.01,
+        lr_scheduler_type="cosine",
     )
 
-    # Create trainer
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -118,10 +129,11 @@ def train_model() -> None:
         data_collator=DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False),
     )
 
-    # Start training
+    print("\nStarting training...\n")
     trainer.train()
+    print("\nTraining complete.\n")
+    print("Saving LoRA model...\n")
 
-    # Save the LoRA adapter
     model.save_pretrained("./lora-patent-misinformation-model")
 
 if __name__ == "__main__":
