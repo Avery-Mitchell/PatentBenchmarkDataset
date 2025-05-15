@@ -6,11 +6,15 @@ This project is for CS 5001 - Natual Language Processing
 
 ## Overview
 
-This repository is a small dataset designed to fact check information about patents.
+This project introduces a small, fine-tuned dataset and model aimed at fact-checking claims related to patents. It leverages real-world misinformation examples, focusing on patent-related claims, and provides a classification model that labels them as True, False, Mixture, or Not Enough Information.
 
 ## Dataset Description
 
-The dataset used in this project comes from articles taken from Snopes about patents. Each instance in the dataset consists of a claim about, or related to, a patent, Snopes's rating (True, False, Mixture, or Not Enough Information), metadata about each article, and the entirety of the Snopes article. 
+The dataset used in this project comes from articles taken from Snopes about patents. Each instance in the dataset consists:
+ - A claim about a patent
+ - Snopes's truth rating (True, False, Mixture, Not Enough Information)
+ - Relevant Metadata
+ - The full article text
 
 ## Dataset Usage
 
@@ -18,21 +22,28 @@ This dataset is useful for students, researchers, scientists, and parties intere
 
 Here's how you use it:
 
-1. **Clone This Repository**: Clone this repository to your local machine or via the [Hugging Face Hub](https://huggingface.co/Avery90/Patent-Misinformation) and enter the directory
+1. **Clone This Repository**: 
 
-2. **Ensure All Dependencies Are Present**: Install all the dependencies in [requirements.txt](https://github.com/Avery-Mitchell/PatentBenchmarkDataset/blob/main/requirements.txt)
+```sh
+git clone https://github.com/Avery-Mitchell/PatentBenchmarkDataset.git
+cd PatentBenchmarkDataset
+```
+
+or access it directly via the [Hugging Face Hub](https://huggingface.co/Avery90/Patent-Misinformation) 
+
+2. **Install Dependencies**: Make sure all required packages are installed
 
 ```sh
 pip install -r requirements.txt
 ```
 
-3. **API Key**: Set the HUGGINGFACE_API_KEY in [api_key.env](https://github.com/Avery-Mitchell/PatentBenchmarkDataset/blob/main/api_key.env) to your own personal API key. This is necessary if you are trying to use Hugging Face's Inference tools.
+3. **Set Up API Key (Optional)**: If using Hugging Face's Inference API, insert your Hugging Face API key in [api_key.env](https://github.com/Avery-Mitchell/PatentBenchmarkDataset/blob/main/api_key.env)
 
 ```sh
 HUGGINGFACE_API_KEY = insert_your_key_here
 ```
 
-4. **Try The Model**: Now you can experiment with the model
+4. **Run The Model**: Run the model by providing a claim and supporting evidence
 
 ```sh
 python .\fine_tuned.py --claim "insert claim here" --evidence "insert evidence for claim here"
@@ -40,12 +51,27 @@ python .\fine_tuned.py --claim "insert claim here" --evidence "insert evidence f
 
 This model works best when you provide the model with as much context (evidence) as you can. This fine-tuned model is built ontop of Mistral AI's Mistral-7B-Instruct-v0.2. Although this model does not necessarily produce the strongest results, it's much smaller in size (when compared to models like Llama and ChatGPT) and can be easily used locally (and in the cloud). It balances size with performance, relying on strong context for good results. 
 
-## Discussion and Improvements
+## Model Details
 
-Although I am happy with this project as it currently stands, there is definitely room for improvement. The actual patent misinformation dataset is relatively sparse, in the future I would like to increase the number of instances in the dataset from other sources (not just Snopes). I also wish that I had the time and resources to try larger models (trying to fine-tune a model on a consumer-grade laptop is not the easiest). Given the time-constraints I had this semester, as well as the fact that my other group member dropped out and did not help much, I think the project turned out good. This was my first experience working with a language model like this.
+ - **Base Model**: [Mistral-7B-Instruct-v0.2](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2)
+ - **Why Mistral?**
+ It's a lightweight, effiecient model that can be run locally (or in the cloud). While it does not offer the same performance as larger models such as GPT and LlaMA, it has a good balance of performance and resource efficiency.
+
+## Limitations and Future Work
+
+While this project has a solid foundation, there is room for improvement
+ - **Dataset Size**: The current dataset is small and only from Snopes. I want to add more instances from a broader range of sources.
+ - **Model Performance**: More powerful models could produce better results, but limited resources (money and hardware) restricted experimentation.
+ - **Collaboration Challenges**: This project started as a group effort. Unfortunately, my teammate dropped out midway, so all the work was completed solo.
+
+Despite these issues, this project was an extremely valuable learning experience and an excellent introduction to building language models for real-world tasks. This was my first time completing a project like this and I learned a ton. 
 
 ## Acknowledgements 
 
 Thank you Dr. Maity for your guidance, patience, and leniency with this project - I greatly appreciate it. 
+
+## Contact
+
+For questions about the project, feel free to reach out via my email or GitHub.
 
 
