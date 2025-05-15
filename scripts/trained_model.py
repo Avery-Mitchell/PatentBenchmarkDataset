@@ -1,17 +1,17 @@
 import json
 import torch
 from datasets import Dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling, PreTrainedTokenizerBase
+from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling, PreTrainedTokenizerBase, BitsAndBytesConfig
 from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_kbit_training
 
 MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.2"
-DATASET_PATH = "dataset.json" 
+DATASET_PATH = "scripts/dataset.json" 
 from api_keys import HUGGINGFACE_API_KEY
 
 
 PROMPT_TEMPLATE: str = (
-    "<s>[INST] You are an expert in evaluating patent-related claims. "
-    "Given the following claim and supporting evidence, determine whether the claim is true, false, or lacks enough information.\n"
+    "<s>[INST] You are an expert in evaluating patent-related claims. Before you answer, consider the context and the evidence provided."
+    "Given the following claim and supporting evidence, determine whether the claim is true, false, both true and false, or lacks enough information.\n"
     "Claim: {claim}\n"
     "Evidence: {evidence}\n"
     "Answer with 'True', 'False', 'Mixture', or 'Not Enough Information' and explain your reasoning. [/INST]"
@@ -90,11 +90,19 @@ def train_model() -> None:
     tokenized_dataset = tokenized_dataset.remove_columns(["label"])
     print("\nTokenization complete.\n")
 
+    quant_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.float16,
+        bnb_4bit_use_double_quant=True,
+        bnb_4bit_quant_type="nf4",
+    )
+
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
-        load_in_4bit=True,
+        quantization_config=quant_config,
         device_map="auto",
-        torch_dtype=torch.float16,
+        trust_remote_code=True,
+        token=HUGGINGFACE_API_KEY
     )
     model = prepare_model_for_kbit_training(model)
 
@@ -102,7 +110,7 @@ def train_model() -> None:
         task_type=TaskType.CAUSAL_LM,
         r=16,
         lora_alpha=32,
-        lora_dropout=0.1,
+        lora_dropout=0.05,
         bias="none",
         target_modules=["q_proj", "v_proj"],
     )
@@ -110,12 +118,12 @@ def train_model() -> None:
 
     training_args = TrainingArguments(
         output_dir="./lora-patent-misinformation-model",
-        per_device_train_batch_size=2,  
+        per_device_train_batch_size=4,  
         gradient_accumulation_steps=4,  
-        num_train_epochs=20, 
-        logging_steps=5,
-        save_strategy="epoch",
-        learning_rate=1e-4,
+        num_train_epochs=10, 
+        logging_steps=20,
+        save_strategy="no",
+        learning_rate=7e-5,
         fp16=True,
         warmup_ratio=0.1,
         weight_decay=0.01,
