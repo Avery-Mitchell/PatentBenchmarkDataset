@@ -2,16 +2,14 @@ import json
 from sklearn.model_selection import train_test_split
 from typing import Optional
 from together import Together
+from dotenv import load_dotenv
 from sklearn.metrics import classification_report
 
-#TODO: Modify dataset.json so that only True/False/Not Enough Information are used as labels
-#TODO: Look at the different models available in Together.ai - change models in run_all_models() to use the best ones
-#TODO: Add variable for end users to add their own API key
-
-from api_keys import TOGETHER_API_KEY
+load_dotenv("api_key.env")
+HF_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 
 # Together.ai client
-client = Together(api_key=TOGETHER_API_KEY) 
+client = Together(api_key=HF_API_KEY) 
 
 def load_data(path: str) -> list[dict[str, any]]:
     """
@@ -79,9 +77,7 @@ def normalize_response(response: str) -> str:
 def run_all_models(test_data: list[dict[str, any]]) -> None:
 
     models = [                
-    "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-    #"Qwen/Qwen2-72B-Instruct",
-    #"google/gemma-2b-it"
+    
     ]
 
     # Calculate the performance of each model using the classification report
