@@ -1,6 +1,7 @@
 import json
 from sklearn.model_selection import train_test_split
 from typing import Optional
+import os
 from together import Together
 from dotenv import load_dotenv
 from sklearn.metrics import classification_report
